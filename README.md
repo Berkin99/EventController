@@ -13,11 +13,8 @@ function, you need to add event controller library.
 
 There is a example usage of event controller in main function.
 
-- void eventInit(); // Init Function
-
-- void eventCallAll(void); // IRQ vector 
-- void eventAdd(void (*event)); // Add function (functions need to be get and return void )
-- void eventRemove(); // Remove last element
-
-- uint8_t get_eventArraySize();
-- uint8_t get_eventArrayCapacity();
+* void eventInit(EventHandle_t* handle);                 // Init Function
+* void eventCall(EventHandle_t* handle);                 // IRQ vector 
+* void eventAdd(EventHandle_t* handle, void (*event));   // Add function (functions need to be get and return void )
+* void eventRemove(EventHandle_t* handle);               // Remove last element
+* void eventFree(EventHandle_t* handle);                 // Free allocated memory for event functions.

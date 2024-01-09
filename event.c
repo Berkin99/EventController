@@ -1,44 +1,47 @@
 // Dynamic Function Pointer Array Allocation - Basic Event Controller 
 // EventController library based on event.h 2024, Irq handle functions.
-// Created : 03-11-2023 : BerkN
+// Created : 08-01-2024 : BerkN
 // Updates available at https://github.com/BerkN/EventController
 
 #include <stdlib.h>
 #include <stdint.h>
 #include "event.h"
 
-Event_t* arr;
-static uint8_t arr_size;
-static uint8_t arr_capacity;
 
-void eventCallAll(void){
-    for (uint8_t i = 0; i < arr_size; i++) {
-        Event_t temp = arr[i];
+void eventInit(EventHandle_t* handle){
+    handle->arr_capacity = EVENT_INIT_CAPACITY;
+	handle->arr_size = 0;
+	handle->arr = malloc(handle->arr_capacity * sizeof(Event_t));
+}
+
+void eventCall(EventHandle_t* handle){
+    for (uint8_t i = 0; i < handle->arr_size; i++) {
+        Event_t temp = handle->arr[i];
         temp();
     }
 }
 
-void eventInit(){
-    arr_capacity = 4;
-	arr_size = 0;
-	arr = malloc(arr_capacity * sizeof(Event_t));
-}
-
-void eventAdd(void (*event)){
-	arr_size++;
-	if (arr_size > arr_capacity) {
-		arr_capacity *= 2;
-		arr = realloc(arr,arr_capacity * sizeof(Event_t));
+void eventAdd(EventHandle_t* handle, void (*event)){
+	
+    if(handle->arr_size == EVENT_MAX_CAPACITY) return;
+    handle->arr_size++;
+	if (handle->arr_size > handle->arr_capacity) {
+        
+		handle->arr_capacity *= 2;        
+        if((handle->arr_capacity)>EVENT_MAX_CAPACITY) handle->arr_capacity = EVENT_MAX_CAPACITY;
+        handle->arr = realloc(handle->arr,handle->arr_capacity * sizeof(Event_t));
 	}
-	arr[arr_size-1] = event;
+
+    if(handle->arr_size>handle->arr_capacity) return;
+	handle->arr[handle->arr_size -1] = event;
 }
 
-
-void eventRemove(){
-    if (!(arr_size > 0)) return;
-    arr[arr_size-1] = NULL;
-    arr_size--;
+void eventRemove(EventHandle_t* handle){
+    if (!(handle->arr_size > 0)) return;
+    handle->arr[handle->arr_size-1] = NULL;
+    handle->arr_size--;
 }
 
-uint8_t get_eventArraySize(){return arr_size;}
-uint8_t get_eventArrayCapacity(){return arr_capacity;}
+void eventFree(EventHandle_t* handle){
+    free(handle->arr);
+}
