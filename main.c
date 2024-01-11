@@ -15,7 +15,7 @@ EventHandle_t eventHandler;
 int main (int argc, char *argv[]){
     printf("Event Controller Test \r\n");
     printf("...\r\n");
-    
+
     eventInit(&eventHandler);
     printf("Initalized Event Array Size : %d\r\n",eventHandler.arr_size);
     printf("Initalized Event Array Capacity : %d\r\n",eventHandler.arr_capacity);

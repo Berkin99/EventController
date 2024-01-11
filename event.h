@@ -1,4 +1,4 @@
-// Dynamic Function Pointer Array Allocation - Basic Event Controller 
+// Dynamic Function Pointer Array Allocation - Basic Event Controller
 // EventController library based on event.h 2024, Irq handle functions.
 // Created : 08-01-2024 : BerkN
 // Updates available at https://github.com/BerkN/EventController
@@ -12,12 +12,19 @@
 #define EVENT_INIT_CAPACITY         2
 #define EVENT_MAX_CAPACITY          8
 
+typedef enum{
+	EVENT_CLOSE = 0,
+	EVENT_READY = 1,
+	EVENT_ERROR = 2
+}EventState_e;
+
 typedef void (*Event_t)(void);
 
 typedef struct EventHandle_s{
     Event_t* arr;
     uint8_t  arr_size;
     uint8_t  arr_capacity;
+    EventState_e state;
 }EventHandle_t;
 
 void eventInit(EventHandle_t* handle);
