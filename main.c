@@ -17,8 +17,9 @@ int main (int argc, char *argv[]){
     printf("Event Controller Test \r\n");
     printf("...\r\n");
 
-    eventHandle_t handle = eventNew();
+    eventHandle_t handle;
 
+    printf("Initalized Event State : %d\r\n",handle.state);
     printf("Initalized Event Array Size : %d\r\n",handle.arr_size);
     printf("Initalized Event Array Capacity : %d\r\n",handle.arr_capacity);
 

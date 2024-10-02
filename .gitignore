@@ -1,0 +1,10 @@
+*.o
+*.a
+*.out
+*.exe
+*.bak
+*.tmp
+*.swp
+lib/*
+.vscode/
+*.log

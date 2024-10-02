@@ -2,7 +2,6 @@
  *  event.c
  *
  *  Dynamic Function Pointer Array Allocation - Basic Event Controller
- *  EventController library based on event.h 2024, Irq handle functions.
  *  Created : 08-01-2024 : BerkN
  *  Update  : 26-08-2024 : event Constructor added.
  *  Updates available at https://github.com/BerkN/EventController

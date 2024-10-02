@@ -2,12 +2,7 @@
 
 ### Dynamically allocated function pointer arrays.
 
-Basic event controller example for interrupt request
-handler function like applications. 
-
-IRQ vector functions predefined in embedded systems. If you 
-want to dynamically change called other functions in interrupt request 
-function, you need to add event controller library.
+Basic event controller for calling subscribed functions for the event.
 
 ### Usage
 
